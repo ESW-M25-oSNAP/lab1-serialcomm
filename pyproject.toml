@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lab1-serialcomm"
+version = "1.0.0"
+description = "Simple serial communication GUI for Arduino/ESP32 sensors"
+authors = [{ name = "Student", email = "student@example.com" }]
+readme = "README.md"
+requires-python = ">=3.9"
+
+# Core dependencies - keep it minimal
+dependencies = [
+    "pyserial>=3.5",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "tomli>=2.0.0; python_version<'3.11'",
+]
+
+# Optional dependencies
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "ruff>=0.1.0",  # Fast linter to replace flake8 + mypy
+]
+
+# Simple entry point
+[project.scripts]
+lab1-serialcomm = "serial_monitor.main:main"
+
+# Tool configurations
+[tool.hatch.build.targets.wheel]
+packages = ["src/serial_monitor"]
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I"]
+fix = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-v", "--tb=short"]
