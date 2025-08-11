@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "lab1-serialcomm"
 version = "1.0.0"
 description = "Simple serial communication GUI for Arduino/ESP32 sensors"
-authors = [{ name = "Student", email = "student@example.com" }]
+authors = [{ name = "Pranshul Shenoy", email = "pranshul.shenoy@research.iiit.ac.in" }, {name = "Neha Prabhu", email = "neha.prabhu@students.iiit.ac.in"}, {name = "Samarth Rao", email = "samarth.rao@research.iiit.ac.in"}, {name = "Avani Sood", email = "avani.sood@research.iiit.ac.in"}]
 readme = "README.md"
 requires-python = ">=3.9"
 
@@ -25,17 +25,23 @@ dev = [
     "pytest>=7.0.0",
     "black>=23.0.0",
     "isort>=5.12.0",
-    "ruff>=0.1.0",  # Fast linter to replace flake8 + mypy
+    "ruff>=0.1.0",
 ]
 
-# Simple entry point
+# Simple entry point (console script)
 [project.scripts]
 lab1-serialcomm = "serial_monitor.main:main"
 
-# Tool configurations
+# Hatch/hatchling build configuration
+# Use the package *path(s)* to point hatchling at your src/ layout.
 [tool.hatch.build.targets.wheel]
 packages = ["src/serial_monitor"]
 
+# (Optional) sdist target: include only the package directory (keeps sdist small)
+[tool.hatch.build.targets.sdist]
+only-include = ["src/serial_monitor"]
+
+# Tool configs
 [tool.black]
 line-length = 88
 
